@@ -1,0 +1,149 @@
+{
+  "description": "MBTI32 キャラクターマスターデータ — 女性側 16タイプ",
+  "characters": [
+    {
+      "mbti": "ENFJ",
+      "type_name_ja": "主人公",
+      "group": "NF",
+      "group_color": "緑",
+      "full_name": "花森 結菜",
+      "reading": "はなもり ゆいな",
+      "origin": "「結」=温かい繋がり、「菜」=人の成長を育てる。髪の花飾りから花森"
+    },
+    {
+      "mbti": "ENFP",
+      "type_name_ja": "広報運動家",
+      "group": "NF",
+      "group_color": "緑",
+      "full_name": "若宮 咲希",
+      "reading": "わかみや さき",
+      "origin": "「咲」=周りを巻き込む場が開く広報力、「希」=ワクワクする未来"
+    },
+    {
+      "mbti": "INFJ",
+      "type_name_ja": "提唱者",
+      "group": "NF",
+      "group_color": "緑",
+      "full_name": "森野 灿",
+      "reading": "もりの あかり",
+      "origin": "「灿」=誰かの未来を少し明るくする、静かな情熱そのもの"
+    },
+    {
+      "mbti": "INFP",
+      "type_name_ja": "仲介者",
+      "group": "NF",
+      "group_color": "緑",
+      "full_name": "葉月 優花",
+      "reading": "はづき ゆうか",
+      "origin": "「優」=世界をやさしくしたい、「花」=創造性と感受性"
+    },
+    {
+      "mbti": "ENTJ",
+      "type_name_ja": "指揮官",
+      "group": "NT",
+      "group_color": "紫",
+      "full_name": "紫堂 凛華",
+      "reading": "しどう りんか",
+      "origin": "「凛」=隣のない統率力、「華」=結果で魅せる存在感"
+    },
+    {
+      "mbti": "ENTP",
+      "type_name_ja": "討論者",
+      "group": "NT",
+      "group_color": "紫",
+      "full_name": "桐原 煌莨",
+      "reading": "きりはら きらり",
+      "origin": "「煌」=ひらめきがキラリと光る瞬間。桐=紫の花を咲かせる木"
+    },
+    {
+      "mbti": "INTJ",
+      "type_name_ja": "戦略家",
+      "group": "NT",
+      "group_color": "紫",
+      "full_name": "嬵野 冴",
+      "reading": "よいの さえ",
+      "origin": "「冴」=冴えた分析力、「嬵」=夜景の中で一人描く時間"
+    },
+    {
+      "mbti": "INTP",
+      "type_name_ja": "論理学者",
+      "group": "NT",
+      "group_color": "紫",
+      "full_name": "菇野 知世",
+      "reading": "すみれの ちせ",
+      "origin": "「知」=知りたいという出発点、菇=スミレ色"
+    },
+    {
+      "mbti": "ESFJ",
+      "type_name_ja": "領事",
+      "group": "SJ",
+      "group_color": "青",
+      "full_name": "青山 円香",
+      "reading": "あおやま まどか",
+      "origin": "「円」=場をまあるくまとめる協調性、「香」=手料理で人を集める"
+    },
+    {
+      "mbti": "ESTJ",
+      "type_name_ja": "幹部",
+      "group": "SJ",
+      "group_color": "青",
+      "full_name": "藍原 綾乃",
+      "reading": "あいはら あやの",
+      "origin": "「綾」=人と計画を織り上げる組織力"
+    },
+    {
+      "mbti": "ISFJ",
+      "type_name_ja": "擁護者",
+      "group": "SJ",
+      "group_color": "青",
+      "full_name": "水城 冩沙",
+      "reading": "みずき なぎさ",
+      "origin": "「冩」=そばにいると穏やかになる安心感"
+    },
+    {
+      "mbti": "ISTJ",
+      "type_name_ja": "管理者",
+      "group": "SJ",
+      "group_color": "青",
+      "full_name": "紺野 真希",
+      "reading": "こんの まき",
+      "origin": "「真」=誠実と責任感、「希」=積み重ねの先にある未来"
+    },
+    {
+      "mbti": "ESFP",
+      "type_name_ja": "エンターテイナー",
+      "group": "SP",
+      "group_color": "黄",
+      "full_name": "明星 うた",
+      "reading": "あかほし うた",
+      "origin": "「うた」=ステージで人を笑顔にする表現力、星モチーフから明星"
+    },
+    {
+      "mbti": "ESTP",
+      "type_name_ja": "起業家",
+      "group": "SP",
+      "group_color": "黄",
+      "full_name": "日野 羼",
+      "reading": "ひの つばさ",
+      "origin": "「羼」=やりたいことに今すぐ飛び出す行動力と瞬発力"
+    },
+    {
+      "mbti": "ISFP",
+      "type_name_ja": "冒険家",
+      "group": "SP",
+      "group_color": "黄",
+      "full_name": "小日向 いろは",
+      "reading": "こひなた いろは",
+      "origin": "「いろは」=色・絵の具・感じるままの美的センス"
+    },
+    {
+      "mbti": "ISTP",
+      "type_name_ja": "巨匠",
+      "group": "SP",
+      "group_color": "黄",
+      "full_name": "鉥治 澄",
+      "reading": "かじ すみ",
+      "origin": "「澄」=澄んだ冷静さと集中、鉥治=手を動かして突き詰める職人性"
+    }
+  ]
+}

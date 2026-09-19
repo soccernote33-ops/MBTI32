@@ -1,0 +1,149 @@
+{
+  "description": "MBTI32 キャラクターマスターデータ — 男性側 16タイプ",
+  "characters": [
+    {
+      "mbti": "ENFJ",
+      "type_name_ja": "主人公",
+      "group": "NF",
+      "group_color": "緑",
+      "full_name": "葉山 陽登",
+      "reading": "はやま はると",
+      "origin": "「陽」=ポジティブさと温かさ、「登」=みんなを引き上げて一歩進む"
+    },
+    {
+      "mbti": "ENFP",
+      "type_name_ja": "運動家",
+      "group": "NF",
+      "group_color": "緑",
+      "full_name": "若葉 湧真",
+      "reading": "わかば ゆうま",
+      "origin": "「湧」=ワクワクと好奇心が湧き出る、若葉=自由な伸びやかさ"
+    },
+    {
+      "mbti": "INFJ",
+      "type_name_ja": "提唱者",
+      "group": "NF",
+      "group_color": "緑",
+      "full_name": "柜 想真",
+      "reading": "ひいらき そうま",
+      "origin": "「想」=深い思考と寄り添う心、柜=静かに葉を茂らせる常緑樹"
+    },
+    {
+      "mbti": "INFP",
+      "type_name_ja": "仲介者",
+      "group": "NF",
+      "group_color": "緑",
+      "full_name": "春野 詩音",
+      "reading": "はるの しおん",
+      "origin": "「詩」=感受性と想像力、「音」=やさしく響く自分らしさ"
+    },
+    {
+      "mbti": "ENTJ",
+      "type_name_ja": "指揮官",
+      "group": "NT",
+      "group_color": "紫",
+      "full_name": "藤堂 将吾",
+      "reading": "とうどう しょうご",
+      "origin": "「将」=指揮官そのもの、藤堂=王冇モチーフに合う重み"
+    },
+    {
+      "mbti": "ENTP",
+      "type_name_ja": "討論者",
+      "group": "NT",
+      "group_color": "紫",
+      "full_name": "桐生 閑斗",
+      "reading": "きりゅう せんと",
+      "origin": "「閑」=ひらめきと即興の議論、桐=紫の花を咲かせる木"
+    },
+    {
+      "mbti": "INTJ",
+      "type_name_ja": "戦略家",
+      "group": "NT",
+      "group_color": "紫",
+      "full_name": "嬵崎 玲司",
+      "reading": "よいざき れいじ",
+      "origin": "「嬵」=夜景の中で一人思考する時間、「玲」=冷静な知性"
+    },
+    {
+      "mbti": "INTP",
+      "type_name_ja": "論理学者",
+      "group": "NT",
+      "group_color": "紫",
+      "full_name": "藤宮 理玖",
+      "reading": "ふじみや りく",
+      "origin": "「理」=論理と探究心、藤=NT群共通の紫"
+    },
+    {
+      "mbti": "ESFJ",
+      "type_name_ja": "領事",
+      "group": "SJ",
+      "group_color": "青",
+      "full_name": "青柳 和真",
+      "reading": "あおやぎ かずま",
+      "origin": "「和」=協調性と場をあためる力"
+    },
+    {
+      "mbti": "ESTJ",
+      "type_name_ja": "幹部",
+      "group": "SJ",
+      "group_color": "青",
+      "full_name": "蒼井 統也",
+      "reading": "あおい とうや",
+      "origin": "「統」=組織をまとめて結果を出す"
+    },
+    {
+      "mbti": "ISFJ",
+      "type_name_ja": "擁護者",
+      "group": "SJ",
+      "group_color": "青",
+      "full_name": "水無瀬 守",
+      "reading": "みなせ まもる",
+      "origin": "「守」=大切な人をずっと支える。名前がそのまま信条"
+    },
+    {
+      "mbti": "ISTJ",
+      "type_name_ja": "管理者",
+      "group": "SJ",
+      "group_color": "青",
+      "full_name": "藍沢 律",
+      "reading": "あいざわ りつ",
+      "origin": "「律」=規律・継続力、藍=落ち着いた藍色"
+    },
+    {
+      "mbti": "ESFP",
+      "type_name_ja": "エンターテイナー",
+      "group": "SP",
+      "group_color": "黄",
+      "full_name": "星宮 奏太",
+      "reading": "ほしみや そうた",
+      "origin": "「奏」=ステージで魅せる表現力、星=カードの星モチーフ"
+    },
+    {
+      "mbti": "ESTP",
+      "type_name_ja": "起業家",
+      "group": "SP",
+      "group_color": "黄",
+      "full_name": "金城 瞬",
+      "reading": "きんじょう しゅん",
+      "origin": "「瞬」=タグにある瞬発力、今すぐやる行動力"
+    },
+    {
+      "mbti": "ISFP",
+      "type_name_ja": "冒険家",
+      "group": "SP",
+      "group_color": "黄",
+      "full_name": "日向 彩人",
+      "reading": "ひなた あやと",
+      "origin": "「彩」=美的センスと感性、日向=自由でマイペースな日だまり"
+    },
+    {
+      "mbti": "ISTP",
+      "type_name_ja": "巨匠",
+      "group": "SP",
+      "group_color": "黄",
+      "full_name": "真鳡 匠",
+      "reading": "まなべ たくみ",
+      "origin": "「匠」=巨匠タイプ直球。黙々と突き詰める職人性"
+    }
+  ]
+}
