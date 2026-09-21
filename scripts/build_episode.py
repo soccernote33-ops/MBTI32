@@ -15,8 +15,10 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).parent))
+from compose_frame import compose
+
 PAUSE_SECONDS = 0.25
-WIDTH, HEIGHT = 1080, 1920  # 縦型ショート
 FPS = 24
 
 
@@ -92,16 +94,20 @@ def main() -> int:
         audio_parts.append(wav)
 
         dur = probe_duration(wav) + (PAUSE_SECONDS if i < len(plan) - 1 else 0)
+
+        cast = script["cast"][line["speaker"]]
+        frame_path = work / f"frame{line['no']:02d}.png"
+        compose(
+            image,
+            script["title"],
+            f"{cast['name']}（{cast['mbti']}）",
+            line["text"],
+            tuple(cast.get("accent", [90, 100, 120])),
+        ).save(frame_path)
+
         seg = work / f"seg{line['no']:02d}.mp4"
-        # 縦型画面の中央に表情を置き、余白は画像をぼかして敷く
-        vf = (
-            f"[0:v]scale={WIDTH}:{HEIGHT}:force_original_aspect_ratio=increase,"
-            f"crop={WIDTH}:{HEIGHT},boxblur=40:4,eq=brightness=-0.1[bg];"
-            f"[0:v]scale={WIDTH}:-2[fg];"
-            f"[bg][fg]overlay=(W-w)/2:(H-h)/2,format=yuv420p"
-        )
-        run(["ffmpeg", "-y", "-loop", "1", "-i", str(image), "-t", f"{dur:.3f}",
-             "-filter_complex", vf, "-r", str(FPS), "-an", str(seg)])
+        run(["ffmpeg", "-y", "-loop", "1", "-i", str(frame_path), "-t", f"{dur:.3f}",
+             "-vf", "format=yuv420p", "-r", str(FPS), "-an", str(seg)])
         segments.append(seg)
 
     audio_list = work / "audio_list.txt"

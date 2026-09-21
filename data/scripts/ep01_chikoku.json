@@ -6,22 +6,42 @@
     "yuina": {
       "name": "花森 結菜",
       "mbti": "ENFJ",
-      "asset_dir": "data/assets/enfj_hanamori_yuina"
+      "asset_dir": "data/assets/enfj_hanamori_yuina",
+      "accent": [
+        74,
+        110,
+        60
+      ]
     },
     "nagisa": {
       "name": "水城 凪沙",
       "mbti": "ISFJ",
-      "asset_dir": "data/assets/isfj_mizuki_nagisa"
+      "asset_dir": "data/assets/isfj_mizuki_nagisa",
+      "accent": [
+        78,
+        124,
+        196
+      ]
     },
     "riku": {
       "name": "藤宮 理玖",
       "mbti": "INTP",
-      "asset_dir": "data/assets/intp_fujimiya_riku"
+      "asset_dir": "data/assets/intp_fujimiya_riku",
+      "accent": [
+        128,
+        110,
+        190
+      ]
     },
     "shun": {
       "name": "金城 瞬",
       "mbti": "ESTP",
-      "asset_dir": "data/assets/estp_kinjo_shun"
+      "asset_dir": "data/assets/estp_kinjo_shun",
+      "accent": [
+        196,
+        150,
+        40
+      ]
     }
   },
   "expression_legend": {
