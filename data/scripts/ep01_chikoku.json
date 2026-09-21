@@ -1,0 +1,38 @@
+{
+  "episode_id": "ep01_chikoku",
+  "title": "遅刻はどこまで許せるか",
+  "format": "ショート動画(約55秒想定)",
+  "cast": {
+    "yuina": {"name": "花森 結菜", "mbti": "ENFJ", "asset_dir": "data/assets/enfj_hanamori_yuina"},
+    "nagisa": {"name": "水城 凪沙", "mbti": "ISFJ", "asset_dir": "data/assets/isfj_mizuki_nagisa"},
+    "riku": {"name": "藤宮 理玖", "mbti": "INTP", "asset_dir": null},
+    "shun": {"name": "金城 瞬", "mbti": "ESTP", "asset_dir": null}
+  },
+  "expression_legend": {
+    "1": "笑顔(にっこり)", "2": "楽しそう(笑う)", "3": "優しい笑み", "4": "怒り",
+    "5": "フラストレーション", "6": "悲しい", "7": "泣く", "8": "驚き",
+    "9": "照れ", "10": "考える", "11": "決意・真剣", "12": "ショック・パニック"
+  },
+  "lines": [
+    {"no": 1, "speaker": "yuina", "expression": 1, "text": "今日のテーマは、『遅刻はどこまで許せるか』です！"},
+    {"no": 2, "speaker": "shun", "expression": 2, "text": "五分は遅刻に入んないっしょ！"},
+    {"no": 3, "speaker": "riku", "expression": 10, "text": "それ、遅刻の定義を自分に都合よく変えてるだけだよね"},
+    {"no": 4, "speaker": "shun", "expression": 12, "text": "いきなり切れ味やばくない！？"},
+    {"no": 5, "speaker": "yuina", "expression": 2, "text": "凪沙ちゃんは、何分まで許せる？"},
+    {"no": 6, "speaker": "nagisa", "expression": 3, "text": "わたしは……待つの、平気だから"},
+    {"no": 7, "speaker": "yuina", "expression": 3, "text": "ほんとに？　無理してない？"},
+    {"no": 8, "speaker": "nagisa", "expression": 1, "text": "この前も、四十分くらい待ったけど、平気だったよ"},
+    {"no": 9, "speaker": "shun", "expression": 8, "text": "よんじゅっぷん！？"},
+    {"no": 10, "speaker": "riku", "expression": 10, "text": "それはもう待ち合わせじゃなくて、待機だね"},
+    {"no": 11, "speaker": "yuina", "expression": 4, "text": "凪沙ちゃん、それは怒っていいやつだよ！"},
+    {"no": 12, "speaker": "nagisa", "expression": 6, "text": "でも、相手にも事情があるかもしれないし……"},
+    {"no": 13, "speaker": "riku", "expression": 11, "text": "遅刻って、事情じゃなくて習慣だと思うけどね"},
+    {"no": 14, "speaker": "shun", "expression": 5, "text": "なんで俺の方見て言うんだよ"},
+    {"no": 15, "speaker": "yuina", "expression": 2, "text": "瞬くんは、遅刻しそうなときどうしてるの？"},
+    {"no": 16, "speaker": "shun", "expression": 11, "text": "走る。全力で"},
+    {"no": 17, "speaker": "riku", "expression": 10, "text": "解決策が、体力……"},
+    {"no": 18, "speaker": "nagisa", "expression": 9, "text": "でも、走ってきてくれたら、ちょっと嬉しいかも"},
+    {"no": 19, "speaker": "shun", "expression": 9, "text": "え、まじで？"},
+    {"no": 20, "speaker": "yuina", "expression": 1, "text": "みんなは、何分まで許せる？　コメントで教えてね！"}
+  ]
+}
