@@ -15,8 +15,10 @@ import subprocess
 import sys
 from pathlib import Path
 
+from PIL import Image
+
 sys.path.insert(0, str(Path(__file__).parent))
-from compose_frame import compose
+from compose_frame import make_background, render_frame, speech_envelope
 
 PAUSE_SECONDS = 0.25
 FPS = 24
@@ -51,6 +53,8 @@ def main() -> int:
     ap.add_argument("--output", default=None)
     ap.add_argument("--allow-missing", action="store_true",
                     help="音声が揃っていない行を飛ばして、途中までのプレビューを作る")
+    ap.add_argument("--still", action="store_true",
+                    help="動きを付けず、1カット1枚の静止画で書き出す")
     args = ap.parse_args()
 
     script = json.loads(Path(args.script).read_text())
@@ -96,18 +100,34 @@ def main() -> int:
         dur = probe_duration(wav) + (PAUSE_SECONDS if i < len(plan) - 1 else 0)
 
         cast = script["cast"][line["speaker"]]
-        frame_path = work / f"frame{line['no']:02d}.png"
-        compose(
-            image,
-            script["title"],
-            f"{cast['name']}（{cast['mbti']}）",
-            line["text"],
-            tuple(cast.get("accent", [90, 100, 120])),
-        ).save(frame_path)
+        accent = tuple(cast.get("accent", [90, 100, 120]))
+        speaker_label = f"{cast['name']}（{cast['mbti']}）"
+        portrait = Image.open(image).convert("RGB")
+        background = make_background(portrait)
 
         seg = work / f"seg{line['no']:02d}.mp4"
-        run(["ffmpeg", "-y", "-loop", "1", "-i", str(frame_path), "-t", f"{dur:.3f}",
-             "-vf", "format=yuv420p", "-r", str(FPS), "-an", str(seg)])
+        if args.still:
+            frame_path = work / f"frame{line['no']:02d}.png"
+            render_frame(background, portrait, script["title"], speaker_label,
+                         line["text"], accent).save(frame_path)
+            run(["ffmpeg", "-y", "-loop", "1", "-i", str(frame_path), "-t", f"{dur:.3f}",
+                 "-vf", "format=yuv420p", "-r", str(FPS), "-an", str(seg)])
+        else:
+            count = max(1, int(round(dur * FPS)))
+            env = speech_envelope(wav, FPS, count)
+            frame_dir = work / f"frames{line['no']:02d}"
+            frame_dir.mkdir(exist_ok=True)
+            for f in frame_dir.glob("*.png"):
+                f.unlink()
+            for n in range(count):
+                elapsed = n / FPS
+                render_frame(background, portrait, script["title"], speaker_label,
+                             line["text"], accent,
+                             progress=n / max(1, count - 1),
+                             loudness=float(env[n]),
+                             elapsed=elapsed).save(frame_dir / f"{n:04d}.png")
+            run(["ffmpeg", "-y", "-framerate", str(FPS), "-i", str(frame_dir / "%04d.png"),
+                 "-vf", "format=yuv420p", "-r", str(FPS), "-an", str(seg)])
         segments.append(seg)
 
     audio_list = work / "audio_list.txt"
