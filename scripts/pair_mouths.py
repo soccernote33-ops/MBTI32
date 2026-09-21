@@ -16,8 +16,10 @@ import numpy as np
 from PIL import Image
 
 # 自動判定が外れた組の手直し。値は開いている方のフォルダ
+# 口を結んだ絵の唇の線を口内と誤認しやすく、特に「決意・真剣」で外れる
 OVERRIDES = {
     "estp_kinjo_shun": {"04": "expressions"},
+    "intp_fujimiya_riku": {"09": "expressions_b", "11": "expressions_b"},
 }
 
 

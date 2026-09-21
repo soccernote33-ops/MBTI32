@@ -68,32 +68,36 @@ def row_bounds(gray: np.ndarray) -> list[tuple[int, int]]:
     return sorted(tallest)
 
 
+def cut_sheet(src: Path, dst: Path, cfg: dict) -> list[tuple[int, int]]:
+    sheet = Image.open(src).convert("RGB")
+    bands = row_bounds(np.array(sheet.convert("L")).astype(float))
+    col_w = (sheet.width - cfg["left"] - cfg["right"] - 3 * cfg["col_gap"]) / 4
+
+    dst.mkdir(parents=True, exist_ok=True)
+    for old in dst.glob("*.png"):
+        old.unlink()
+
+    for i, label in enumerate(cfg["labels"]):
+        r, c = divmod(i, 4)
+        top, bottom = bands[r]
+        x0 = int(cfg["left"] + c * (col_w + cfg["col_gap"]))
+        sheet.crop((x0, top + 3, int(x0 + col_w),
+                    bottom - 3 - cfg["bottom_trim"])).save(dst / f"{i + 1:02d}_{label}.png")
+    return bands
+
+
 def main() -> int:
     for char, cfg in SHEETS.items():
-        src = Path("data/assets") / char / "source" / "expression_sheet.webp"
-        if not src.exists():
-            print(f"skip {char}: シートがありません")
-            continue
-        sheet = Image.open(src).convert("RGB")
-        gray = np.array(sheet.convert("L")).astype(float)
-        bands = row_bounds(gray)
-
-        width = sheet.width
-        col_w = (width - cfg["left"] - cfg["right"] - 3 * cfg["col_gap"]) / 4
-
-        dst = Path("data/assets") / char / "expressions"
-        dst.mkdir(parents=True, exist_ok=True)
-        for old in dst.glob("*.png"):
-            old.unlink()
-
-        for i, label in enumerate(cfg["labels"]):
-            r, c = divmod(i, 4)
-            top, bottom = bands[r]
-            x0 = int(cfg["left"] + c * (col_w + cfg["col_gap"]))
-            panel = sheet.crop((x0, top + 3, int(x0 + col_w), bottom - 3 - cfg["bottom_trim"]))
-            panel.save(dst / f"{i + 1:02d}_{label}.png")
-
-        print(f"{char}: 12枚 (段の位置 {[b for b in bands]})")
+        base = Path("data/assets") / char
+        # 2枚目のシートは口の開閉ペアに使う
+        for suffix, folder in (("", "expressions"), ("_b", "expressions_b")):
+            src = base / "source" / f"expression_sheet{suffix}.webp"
+            if not src.exists():
+                if not suffix:
+                    print(f"skip {char}: シートがありません")
+                continue
+            bands = cut_sheet(src, base / folder, cfg)
+            print(f"{char}/{folder}: 12枚 (段の位置 {bands})")
     return 0
 
 
