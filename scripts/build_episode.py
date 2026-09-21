@@ -45,6 +45,8 @@ def main() -> int:
     ap.add_argument("--script", required=True)
     ap.add_argument("--voice-dir", required=True)
     ap.add_argument("--output", default=None)
+    ap.add_argument("--allow-missing", action="store_true",
+                    help="音声が揃っていない行を飛ばして、途中までのプレビューを作る")
     args = ap.parse_args()
 
     script = json.loads(Path(args.script).read_text())
@@ -66,10 +68,15 @@ def main() -> int:
             continue
         plan.append((line, wav, find_expression(Path(asset_dir), line["expression"])))
 
-    if missing:
+    if missing and not args.allow_missing:
         print("以下が見つからないため中断します:", file=sys.stderr)
         for m in missing:
             print(f"  - {m}", file=sys.stderr)
+        return 1
+    if missing:
+        print(f"未収録{len(missing)}行を飛ばします: {', '.join(missing)}")
+    if not plan:
+        print("使える音声が1本もありません", file=sys.stderr)
         return 1
 
     pause = work / "pause.wav"
