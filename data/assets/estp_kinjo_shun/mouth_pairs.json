@@ -1,0 +1,50 @@
+{
+  "01": {
+    "open": "data/assets/estp_kinjo_shun/expressions/01_egao.png",
+    "closed": "data/assets/estp_kinjo_shun/expressions_b/01_egao.png"
+  },
+  "02": {
+    "open": "data/assets/estp_kinjo_shun/expressions/02_warai.png",
+    "closed": "data/assets/estp_kinjo_shun/expressions_b/02_warai.png"
+  },
+  "03": {
+    "open": "data/assets/estp_kinjo_shun/expressions_b/03_yasashii_egao.png",
+    "closed": "data/assets/estp_kinjo_shun/expressions/03_yasashii_egao.png"
+  },
+  "04": {
+    "open": "data/assets/estp_kinjo_shun/expressions/04_ikari.png",
+    "closed": "data/assets/estp_kinjo_shun/expressions_b/04_ikari.png"
+  },
+  "05": {
+    "open": "data/assets/estp_kinjo_shun/expressions_b/05_frustration.png",
+    "closed": "data/assets/estp_kinjo_shun/expressions/05_frustration.png"
+  },
+  "06": {
+    "open": "data/assets/estp_kinjo_shun/expressions_b/06_kanashii.png",
+    "closed": "data/assets/estp_kinjo_shun/expressions/06_kanashii.png"
+  },
+  "07": {
+    "open": "data/assets/estp_kinjo_shun/expressions/07_naku.png",
+    "closed": "data/assets/estp_kinjo_shun/expressions_b/07_naku.png"
+  },
+  "08": {
+    "open": "data/assets/estp_kinjo_shun/expressions/08_odoroki.png",
+    "closed": "data/assets/estp_kinjo_shun/expressions_b/08_odoroki.png"
+  },
+  "09": {
+    "open": "data/assets/estp_kinjo_shun/expressions_b/09_tere.png",
+    "closed": "data/assets/estp_kinjo_shun/expressions/09_tere.png"
+  },
+  "10": {
+    "open": "data/assets/estp_kinjo_shun/expressions_b/10_kangaeru.png",
+    "closed": "data/assets/estp_kinjo_shun/expressions/10_kangaeru.png"
+  },
+  "11": {
+    "open": "data/assets/estp_kinjo_shun/expressions_b/11_ketsui.png",
+    "closed": "data/assets/estp_kinjo_shun/expressions/11_ketsui.png"
+  },
+  "12": {
+    "open": "data/assets/estp_kinjo_shun/expressions/12_panic.png",
+    "closed": "data/assets/estp_kinjo_shun/expressions_b/12_panic.png"
+  }
+}

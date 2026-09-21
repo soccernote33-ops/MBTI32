@@ -37,6 +37,9 @@ def run(cmd: list[str]) -> None:
     subprocess.run(cmd + ["-v", "error"], check=True)
 
 
+OPEN_ON, OPEN_OFF, MIN_HOLD = 0.5, 0.3, 2
+
+
 def find_expression(asset_dir: Path, number: int) -> Path:
     """ラベル除去済みの画像を優先し、無ければ切り出したままの画像を使う"""
     for folder in ("expressions_clean", "expressions"):
@@ -44,6 +47,30 @@ def find_expression(asset_dir: Path, number: int) -> Path:
         if matches:
             return matches[0]
     raise FileNotFoundError(f"表情{number}の画像が {asset_dir} にありません")
+
+
+def find_mouth_pair(asset_dir: Path, number: int) -> dict[str, Image.Image] | None:
+    """口の開閉ペアがあれば読み込む"""
+    pairs_file = asset_dir / "mouth_pairs.json"
+    if not pairs_file.exists():
+        return None
+    pair = json.loads(pairs_file.read_text()).get(f"{number:02d}")
+    if not pair:
+        return None
+    return {state: Image.open(path).convert("RGB") for state, path in pair.items()}
+
+
+def mouth_states(envelope, count: int) -> list[str]:
+    """音量から口の開閉を決める。細かくバタつかないよう最低2コマは保つ"""
+    states, current, held = [], "closed", 0
+    for n in range(count):
+        level = float(envelope[n])
+        want = "open" if level > OPEN_ON else ("closed" if level < OPEN_OFF else current)
+        if want != current and held >= MIN_HOLD:
+            current, held = want, 0
+        held += 1
+        states.append(current)
+    return states
 
 
 def main() -> int:
@@ -115,17 +142,20 @@ def main() -> int:
         else:
             count = max(1, int(round(dur * FPS)))
             env = speech_envelope(wav, FPS, count)
+            mouths = find_mouth_pair(Path(cast["asset_dir"]), line["expression"])
+            states = (mouth_states(speech_envelope(wav, FPS, count, smooth=False), count)
+                      if mouths else None)
             frame_dir = work / f"frames{line['no']:02d}"
             frame_dir.mkdir(exist_ok=True)
             for f in frame_dir.glob("*.png"):
                 f.unlink()
             for n in range(count):
-                elapsed = n / FPS
-                render_frame(background, portrait, script["title"], speaker_label,
+                art = mouths[states[n]] if mouths else portrait
+                render_frame(background, art, script["title"], speaker_label,
                              line["text"], accent,
                              progress=n / max(1, count - 1),
                              loudness=float(env[n]),
-                             elapsed=elapsed).save(frame_dir / f"{n:04d}.png")
+                             elapsed=n / FPS).save(frame_dir / f"{n:04d}.png")
             run(["ffmpeg", "-y", "-framerate", str(FPS), "-i", str(frame_dir / "%04d.png"),
                  "-vf", "format=yuv420p", "-r", str(FPS), "-an", str(seg)])
         segments.append(seg)

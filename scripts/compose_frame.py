@@ -44,8 +44,12 @@ def wrap_japanese(text: str, limit: int) -> list[str]:
     return lines or [""]
 
 
-def speech_envelope(wav_path: Path, fps: int, frames: int) -> np.ndarray:
-    """音量の起伏を0〜1で返す。立ち絵の弾みに使う"""
+def speech_envelope(wav_path: Path, fps: int, frames: int,
+                    smooth: bool = True) -> np.ndarray:
+    """音量の起伏を0〜1で返す。
+
+    立ち絵の弾みにはならした値、口の開閉には音の切れ目が残る生の値を使う。
+    """
     with wave.open(str(wav_path), "rb") as w:
         rate = w.getframerate()
         data = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(float)
@@ -61,6 +65,8 @@ def speech_envelope(wav_path: Path, fps: int, frames: int) -> np.ndarray:
     peak = env.max()
     if peak > 0:
         env /= peak
+    if not smooth:
+        return env
     # 急に跳ねないようにならす
     return np.convolve(env, np.ones(3) / 3, mode="same")
 
