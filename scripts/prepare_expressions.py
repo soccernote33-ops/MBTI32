@@ -12,11 +12,9 @@ from PIL import Image, ImageDraw, ImageFont
 
 FONT = "/usr/share/fonts/truetype/fonts-japanese-gothic.ttf"
 
-CHARACTERS = {
-    # ENFJのシートはラベルが絵に直接重なっているため、必ず左上を覆う必要がある
-    "enfj_hanamori_yuina": {"name": "花森 結菜", "subtitle": "ENFJ 主人公",
-                            "accent": (74, 110, 60), "corner": "tl", "plate_w": 218},
-}
+# ラベル入りのシートしか無いキャラをここに書く。
+# 全員ラベルなしのシートに差し替わったので、今は対象なし。
+CHARACTERS: dict[str, dict] = {}
 
 PLATE_W, PLATE_H, MARGIN = 192, 124, 4
 CORNERS = ("tl", "tr", "bl", "br")

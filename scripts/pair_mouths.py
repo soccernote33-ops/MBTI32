@@ -20,6 +20,7 @@ from PIL import Image
 OVERRIDES = {
     "estp_kinjo_shun": {"04": "expressions"},
     "intp_fujimiya_riku": {"09": "expressions_b", "11": "expressions_b"},
+    "enfj_hanamori_yuina": {"02": "expressions_b", "10": "expressions_b"},
 }
 
 
