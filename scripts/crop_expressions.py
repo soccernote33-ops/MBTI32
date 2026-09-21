@@ -15,8 +15,6 @@ from PIL import Image
 SHEETS = {
     "enfj_hanamori_yuina": {
         "left": 29, "right": 12, "col_gap": 10, "bottom_trim": 0,
-        # 2枚目は余白の取り方が違うので、列の位置を別に指定する
-        "sheet_b": {"left": 11, "right": 12, "col_gap": 10, "bottom_trim": 0},
         "labels": ["nikkori", "tanoshisou", "yasashii_hohoemi", "ikari",
                    "kuyashii", "kanashii", "naku", "odoroki",
                    "tere", "kangaeru", "ketsui", "panic"],

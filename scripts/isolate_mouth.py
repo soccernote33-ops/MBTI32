@@ -19,15 +19,24 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFilter
 
-MOUTH_BOX = (0.32, 0.54, 0.74, 0.90)   # 左, 上, 右, 下 (画像比)
-FEATHER = 0.05                          # ふちのぼかし幅 (画像比)
+# キャラごとの口の位置 (左, 上, 右, 下 / 画像比)。
+# 顔の大きさも向きもキャラで違うため共通の値は使えない。差分や口内の色から
+# 自動で探す方法も試したが、髪の描き分けや目の影に引っ張られて当てにならず、
+# 12枚すべてに口が収まることを目で見て決めている。
+# シートを作り直したら check_mouth_box.py で再確認すること。
+MOUTH_BOXES = {
+    "enfj_hanamori_yuina": (0.30, 0.46, 0.68, 0.78),
+    "isfj_mizuki_nagisa": (0.40, 0.50, 0.80, 0.82),
+    "intp_fujimiya_riku": (0.30, 0.62, 0.70, 0.94),
+    "estp_kinjo_shun": (0.32, 0.56, 0.72, 0.90),
+}
+FEATHER = 0.04                          # ふちのぼかし幅 (画像比)
 
 
-def mouth_mask(size: tuple[int, int]) -> Image.Image:
+def mouth_mask(size: tuple[int, int], box: tuple[float, float, float, float]) -> Image.Image:
     w, h = size
-    box = (w * MOUTH_BOX[0], h * MOUTH_BOX[1], w * MOUTH_BOX[2], h * MOUTH_BOX[3])
     mask = Image.new("L", size, 0)
-    ImageDraw.Draw(mask).ellipse(box, fill=255)
+    ImageDraw.Draw(mask).ellipse((w * box[0], h * box[1], w * box[2], h * box[3]), fill=255)
     return mask.filter(ImageFilter.GaussianBlur(w * FEATHER))
 
 
@@ -35,6 +44,10 @@ def main() -> int:
     for char_dir in sorted(p for p in Path("data/assets").iterdir() if p.is_dir()):
         pairs_file = char_dir / "mouth_pairs.json"
         if not pairs_file.exists():
+            continue
+        box = MOUTH_BOXES.get(char_dir.name)
+        if box is None:
+            print(f"skip {char_dir.name}: 口の位置が未設定")
             continue
         pairs = json.loads(pairs_file.read_text())
         out_dir = char_dir / "mouth_frames"
@@ -45,7 +58,7 @@ def main() -> int:
             closed_img = Image.open(pair["closed"]).convert("RGB").resize(open_img.size)
 
             merged = open_img.copy()
-            merged.paste(closed_img, (0, 0), mouth_mask(open_img.size))
+            merged.paste(closed_img, (0, 0), mouth_mask(open_img.size, box))
 
             open_img.save(out_dir / f"{number}_open.png")
             merged.save(out_dir / f"{number}_closed.png")
