@@ -22,7 +22,8 @@ SHEETS = {
                    "tere", "kangaeru", "ketsui", "panic"],
     },
     "isfj_mizuki_nagisa": {
-        "left": 205, "right": 8, "col_gap": 10, "bottom_trim": 0,
+        # ラベルは空欄だが帯そのものが残るので、下端を落として消す
+        "left": 205, "right": 8, "col_gap": 10, "bottom_trim": 26,
         "labels": ["egao", "warau", "yasashii_emi", "ikari",
                    "frustration", "kanashii", "naku", "odoroki",
                    "tere", "kangaeru", "ketsui", "panic"],
@@ -70,10 +71,29 @@ def row_bounds(gray: np.ndarray) -> list[tuple[int, int]]:
     return sorted(tallest)
 
 
+def detect_columns(gray: np.ndarray) -> list[tuple[int, int]] | None:
+    """余白から4列の左右位置を読む。等幅に割れなければ諦める"""
+    edges = [(a + b) // 2 for a, b in gutter_runs(gray.T)]
+    bands = sorted(((edges[i], edges[i + 1]) for i in range(len(edges) - 1)),
+                   key=lambda b: b[1] - b[0], reverse=True)[:4]
+    if len(bands) < 4:
+        return None
+    widths = [b - a for a, b in bands]
+    if max(widths) / min(widths) > 1.15:
+        return None
+    return sorted(bands)
+
+
 def cut_sheet(src: Path, dst: Path, cfg: dict) -> list[tuple[int, int]]:
     sheet = Image.open(src).convert("RGB")
-    bands = row_bounds(np.array(sheet.convert("L")).astype(float))
-    col_w = (sheet.width - cfg["left"] - cfg["right"] - 3 * cfg["col_gap"]) / 4
+    gray = np.array(sheet.convert("L")).astype(float)
+    bands = row_bounds(gray)
+
+    columns = detect_columns(gray)
+    if columns is None:
+        col_w = (sheet.width - cfg["left"] - cfg["right"] - 3 * cfg["col_gap"]) / 4
+        columns = [(int(cfg["left"] + c * (col_w + cfg["col_gap"])),
+                    int(cfg["left"] + c * (col_w + cfg["col_gap"]) + col_w)) for c in range(4)]
 
     dst.mkdir(parents=True, exist_ok=True)
     for old in dst.glob("*.png"):
@@ -82,8 +102,8 @@ def cut_sheet(src: Path, dst: Path, cfg: dict) -> list[tuple[int, int]]:
     for i, label in enumerate(cfg["labels"]):
         r, c = divmod(i, 4)
         top, bottom = bands[r]
-        x0 = int(cfg["left"] + c * (col_w + cfg["col_gap"]))
-        sheet.crop((x0, top + 3, int(x0 + col_w),
+        x0, x1 = columns[c]
+        sheet.crop((x0 + 2, top + 3, x1 - 2,
                     bottom - 3 - cfg["bottom_trim"])).save(dst / f"{i + 1:02d}_{label}.png")
     return bands
 

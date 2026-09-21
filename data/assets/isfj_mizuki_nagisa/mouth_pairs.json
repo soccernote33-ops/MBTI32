@@ -1,0 +1,50 @@
+{
+  "01": {
+    "open": "data/assets/isfj_mizuki_nagisa/expressions/01_egao.png",
+    "closed": "data/assets/isfj_mizuki_nagisa/expressions_b/01_egao.png"
+  },
+  "02": {
+    "open": "data/assets/isfj_mizuki_nagisa/expressions/02_warau.png",
+    "closed": "data/assets/isfj_mizuki_nagisa/expressions_b/02_warau.png"
+  },
+  "03": {
+    "open": "data/assets/isfj_mizuki_nagisa/expressions_b/03_yasashii_emi.png",
+    "closed": "data/assets/isfj_mizuki_nagisa/expressions/03_yasashii_emi.png"
+  },
+  "04": {
+    "open": "data/assets/isfj_mizuki_nagisa/expressions_b/04_ikari.png",
+    "closed": "data/assets/isfj_mizuki_nagisa/expressions/04_ikari.png"
+  },
+  "05": {
+    "open": "data/assets/isfj_mizuki_nagisa/expressions/05_frustration.png",
+    "closed": "data/assets/isfj_mizuki_nagisa/expressions_b/05_frustration.png"
+  },
+  "06": {
+    "open": "data/assets/isfj_mizuki_nagisa/expressions_b/06_kanashii.png",
+    "closed": "data/assets/isfj_mizuki_nagisa/expressions/06_kanashii.png"
+  },
+  "07": {
+    "open": "data/assets/isfj_mizuki_nagisa/expressions/07_naku.png",
+    "closed": "data/assets/isfj_mizuki_nagisa/expressions_b/07_naku.png"
+  },
+  "08": {
+    "open": "data/assets/isfj_mizuki_nagisa/expressions/08_odoroki.png",
+    "closed": "data/assets/isfj_mizuki_nagisa/expressions_b/08_odoroki.png"
+  },
+  "09": {
+    "open": "data/assets/isfj_mizuki_nagisa/expressions_b/09_tere.png",
+    "closed": "data/assets/isfj_mizuki_nagisa/expressions/09_tere.png"
+  },
+  "10": {
+    "open": "data/assets/isfj_mizuki_nagisa/expressions_b/10_kangaeru.png",
+    "closed": "data/assets/isfj_mizuki_nagisa/expressions/10_kangaeru.png"
+  },
+  "11": {
+    "open": "data/assets/isfj_mizuki_nagisa/expressions/11_ketsui.png",
+    "closed": "data/assets/isfj_mizuki_nagisa/expressions_b/11_ketsui.png"
+  },
+  "12": {
+    "open": "data/assets/isfj_mizuki_nagisa/expressions/12_panic.png",
+    "closed": "data/assets/isfj_mizuki_nagisa/expressions_b/12_panic.png"
+  }
+}
