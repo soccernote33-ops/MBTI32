@@ -1,0 +1,5 @@
+# テスト動画とその中間ファイルはスクリプトで再生成できるため管理対象外
+data/assets/*/test_video/
+
+.DS_Store
+__MACOSX/
