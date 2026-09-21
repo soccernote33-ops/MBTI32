@@ -1,50 +1,50 @@
 {
   "01": {
-    "open": "data/assets/intp_fujimiya_riku/expressions/01_egao.png",
-    "closed": "data/assets/intp_fujimiya_riku/expressions_b/01_egao.png"
+    "open": "data/assets/intp_fujimiya_riku/mouth_frames/01_open.png",
+    "closed": "data/assets/intp_fujimiya_riku/mouth_frames/01_closed.png"
   },
   "02": {
-    "open": "data/assets/intp_fujimiya_riku/expressions/02_oowarai.png",
-    "closed": "data/assets/intp_fujimiya_riku/expressions_b/02_oowarai.png"
+    "open": "data/assets/intp_fujimiya_riku/mouth_frames/02_open.png",
+    "closed": "data/assets/intp_fujimiya_riku/mouth_frames/02_closed.png"
   },
   "03": {
-    "open": "data/assets/intp_fujimiya_riku/expressions_b/03_yasashii_egao.png",
-    "closed": "data/assets/intp_fujimiya_riku/expressions/03_yasashii_egao.png"
+    "open": "data/assets/intp_fujimiya_riku/mouth_frames/03_open.png",
+    "closed": "data/assets/intp_fujimiya_riku/mouth_frames/03_closed.png"
   },
   "04": {
-    "open": "data/assets/intp_fujimiya_riku/expressions_b/04_ikari.png",
-    "closed": "data/assets/intp_fujimiya_riku/expressions/04_ikari.png"
+    "open": "data/assets/intp_fujimiya_riku/mouth_frames/04_open.png",
+    "closed": "data/assets/intp_fujimiya_riku/mouth_frames/04_closed.png"
   },
   "05": {
-    "open": "data/assets/intp_fujimiya_riku/expressions_b/05_frustration.png",
-    "closed": "data/assets/intp_fujimiya_riku/expressions/05_frustration.png"
+    "open": "data/assets/intp_fujimiya_riku/mouth_frames/05_open.png",
+    "closed": "data/assets/intp_fujimiya_riku/mouth_frames/05_closed.png"
   },
   "06": {
-    "open": "data/assets/intp_fujimiya_riku/expressions_b/06_kanashimi.png",
-    "closed": "data/assets/intp_fujimiya_riku/expressions/06_kanashimi.png"
+    "open": "data/assets/intp_fujimiya_riku/mouth_frames/06_open.png",
+    "closed": "data/assets/intp_fujimiya_riku/mouth_frames/06_closed.png"
   },
   "07": {
-    "open": "data/assets/intp_fujimiya_riku/expressions/07_naku.png",
-    "closed": "data/assets/intp_fujimiya_riku/expressions_b/07_naku.png"
+    "open": "data/assets/intp_fujimiya_riku/mouth_frames/07_open.png",
+    "closed": "data/assets/intp_fujimiya_riku/mouth_frames/07_closed.png"
   },
   "08": {
-    "open": "data/assets/intp_fujimiya_riku/expressions/08_odoroki.png",
-    "closed": "data/assets/intp_fujimiya_riku/expressions_b/08_odoroki.png"
+    "open": "data/assets/intp_fujimiya_riku/mouth_frames/08_open.png",
+    "closed": "data/assets/intp_fujimiya_riku/mouth_frames/08_closed.png"
   },
   "09": {
-    "open": "data/assets/intp_fujimiya_riku/expressions_b/09_tere.png",
-    "closed": "data/assets/intp_fujimiya_riku/expressions/09_tere.png"
+    "open": "data/assets/intp_fujimiya_riku/mouth_frames/09_open.png",
+    "closed": "data/assets/intp_fujimiya_riku/mouth_frames/09_closed.png"
   },
   "10": {
-    "open": "data/assets/intp_fujimiya_riku/expressions_b/10_kangaechu.png",
-    "closed": "data/assets/intp_fujimiya_riku/expressions/10_kangaechu.png"
+    "open": "data/assets/intp_fujimiya_riku/mouth_frames/10_open.png",
+    "closed": "data/assets/intp_fujimiya_riku/mouth_frames/10_closed.png"
   },
   "11": {
-    "open": "data/assets/intp_fujimiya_riku/expressions_b/11_ketsui.png",
-    "closed": "data/assets/intp_fujimiya_riku/expressions/11_ketsui.png"
+    "open": "data/assets/intp_fujimiya_riku/mouth_frames/11_open.png",
+    "closed": "data/assets/intp_fujimiya_riku/mouth_frames/11_closed.png"
   },
   "12": {
-    "open": "data/assets/intp_fujimiya_riku/expressions/12_panic.png",
-    "closed": "data/assets/intp_fujimiya_riku/expressions_b/12_panic.png"
+    "open": "data/assets/intp_fujimiya_riku/mouth_frames/12_open.png",
+    "closed": "data/assets/intp_fujimiya_riku/mouth_frames/12_closed.png"
   }
 }
