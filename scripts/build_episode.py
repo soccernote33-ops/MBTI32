@@ -34,10 +34,12 @@ def run(cmd: list[str]) -> None:
 
 
 def find_expression(asset_dir: Path, number: int) -> Path:
-    matches = sorted((asset_dir / "expressions").glob(f"{number:02d}_*.png"))
-    if not matches:
-        raise FileNotFoundError(f"表情{number}の画像が {asset_dir} にありません")
-    return matches[0]
+    """ラベル除去済みの画像を優先し、無ければ切り出したままの画像を使う"""
+    for folder in ("expressions_clean", "expressions"):
+        matches = sorted((asset_dir / folder).glob(f"{number:02d}_*.png"))
+        if matches:
+            return matches[0]
+    raise FileNotFoundError(f"表情{number}の画像が {asset_dir} にありません")
 
 
 def main() -> int:
