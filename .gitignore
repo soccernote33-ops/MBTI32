@@ -7,3 +7,6 @@ __MACOSX/
 # エピソードの中間ファイルと書き出し済み動画
 data/episodes/*/build/
 data/episodes/*/*.mp4
+
+__pycache__/
+*.pyc
