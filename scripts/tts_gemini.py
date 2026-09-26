@@ -119,6 +119,7 @@ def main() -> int:
             print(f"{args.only}行目が台本にありません", file=sys.stderr)
             return 1
 
+    failed = []
     for line in lines:
         speaker = line["speaker"]
         setting = VOICES.get(speaker, {})
@@ -139,21 +140,29 @@ def main() -> int:
                 if err.code != 429 or attempt == RETRIES - 1:
                     print(f"{target.name}: {err.code} {err.read().decode()[:300]}",
                           file=sys.stderr)
-                    return 1
+                    break
                 wait = BACKOFF * (attempt + 1)
                 print(f"{target.name}: レート制限のため{wait}秒待ちます")
                 time.sleep(wait)
             except EmptyAudio as err:
                 if attempt == RETRIES - 1:
                     print(f"{target.name}: {err}", file=sys.stderr)
-                    return 1
+                    break
                 print(f"{target.name}: 音声が返らず再試行します ({err})")
                 time.sleep(BACKOFF)
+
+        # 1行が通らなくても、残りの行は進める
+        if pcm is None:
+            failed.append(line["no"])
+            continue
 
         write_wav(target, pcm)
         print(f"{target.name}  {len(pcm) / (SAMPLE_RATE * SAMPLE_WIDTH):.1f}秒  {line['text'][:20]}")
         time.sleep(PACE)
 
+    if failed:
+        print(f"生成できなかった行: {failed}", file=sys.stderr)
+        return 1
     return 0
 
 
