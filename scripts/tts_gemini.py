@@ -49,6 +49,10 @@ VOICES = {
 }
 
 
+class EmptyAudio(RuntimeError):
+    """音声が入っていない応答。一時的なことが多いので再試行する"""
+
+
 def synthesise(text: str, voice: str, style: str, model: str, key: str | None) -> bytes:
     prompt = f"{style}読み上げてください: {text}" if style else text
     body = json.dumps({
@@ -71,11 +75,17 @@ def synthesise(text: str, voice: str, style: str, model: str, key: str | None) -
     with urllib.request.urlopen(request, timeout=120) as response:
         payload = json.load(response)
 
-    for part in payload["candidates"][0]["content"]["parts"]:
+    candidates = payload.get("candidates") or []
+    if not candidates or "content" not in candidates[0]:
+        # 中身が無いまま返ることがある。理由を添えて呼び出し側で再試行させる
+        reason = candidates[0].get("finishReason") if candidates else None
+        raise EmptyAudio(f"理由={reason} 応答={json.dumps(payload, ensure_ascii=False)[:300]}")
+
+    for part in candidates[0]["content"].get("parts", []):
         data = part.get("inlineData") or part.get("inline_data")
         if data:
             return base64.b64decode(data["data"])
-    raise RuntimeError(f"音声が返りませんでした: {json.dumps(payload)[:400]}")
+    raise EmptyAudio(f"音声データなし: {json.dumps(payload, ensure_ascii=False)[:300]}")
 
 
 def write_wav(path: Path, pcm: bytes) -> None:
@@ -133,6 +143,12 @@ def main() -> int:
                 wait = BACKOFF * (attempt + 1)
                 print(f"{target.name}: レート制限のため{wait}秒待ちます")
                 time.sleep(wait)
+            except EmptyAudio as err:
+                if attempt == RETRIES - 1:
+                    print(f"{target.name}: {err}", file=sys.stderr)
+                    return 1
+                print(f"{target.name}: 音声が返らず再試行します ({err})")
+                time.sleep(BACKOFF)
 
         write_wav(target, pcm)
         print(f"{target.name}  {len(pcm) / (SAMPLE_RATE * SAMPLE_WIDTH):.1f}秒  {line['text'][:20]}")
