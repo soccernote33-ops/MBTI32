@@ -5,7 +5,9 @@ COEIROINKは画面から1行ずつ書き出す必要があり、20行のエピ�
 こちらは台本を渡せば全行がまとめて生成される。出力の名前と形式は
 build_episode.py がそのまま読める形（01_yuina.wav）に揃えてある。
 
-    export GEMINI_API_KEY=...        # 環境に登録済みなら不要
+    # 環境の「API認証情報」に登録済みならキーの指定は不要
+    #   許可ウェブサイト: generativelanguage.googleapis.com
+    #   カスタムヘッダー: x-goog-api-key (プレフィックスなし)
     python3 scripts/tts_gemini.py --script data/scripts/ep01_chikoku.json \
                                   --out data/episodes/ep01/voices_gemini
     python3 scripts/tts_gemini.py --script ... --out ... --only 1   # 1行だけ試す
@@ -42,7 +44,7 @@ VOICES = {
 }
 
 
-def synthesise(text: str, voice: str, style: str, model: str, key: str) -> bytes:
+def synthesise(text: str, voice: str, style: str, model: str, key: str | None) -> bytes:
     prompt = f"{style}読み上げてください: {text}" if style else text
     body = json.dumps({
         "contents": [{"parts": [{"text": prompt}]}],
@@ -54,9 +56,13 @@ def synthesise(text: str, voice: str, style: str, model: str, key: str) -> bytes
         },
     }).encode()
 
-    request = urllib.request.Request(
-        API.format(model=model), data=body,
-        headers={"Content-Type": "application/json", "x-goog-api-key": key})
+    # 環境のAPI認証情報に登録してある場合、キーは送信時に差し込まれるので
+    # こちらでは付けない。環境変数がある時だけ自前で付ける。
+    headers = {"Content-Type": "application/json"}
+    if key:
+        headers["x-goog-api-key"] = key
+
+    request = urllib.request.Request(API.format(model=model), data=body, headers=headers)
     with urllib.request.urlopen(request, timeout=120) as response:
         payload = json.load(response)
 
@@ -83,11 +89,8 @@ def main() -> int:
     ap.add_argument("--only", type=int, help="この行番号だけ生成する")
     args = ap.parse_args()
 
+    # 環境のAPI認証情報を使う場合は未設定で正しい
     key = os.environ.get("GEMINI_API_KEY")
-    if not key:
-        print("GEMINI_API_KEY が設定されていません。環境に登録してから"
-              "新しいセッションで実行してください。", file=sys.stderr)
-        return 1
 
     script = json.loads(Path(args.script).read_text())
     out_dir = Path(args.out)
