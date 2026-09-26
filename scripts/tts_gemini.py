@@ -21,6 +21,7 @@ import base64
 import json
 import os
 import sys
+import time
 import urllib.error
 import urllib.request
 import wave
@@ -31,6 +32,10 @@ API = ("https://generativelanguage.googleapis.com/v1beta/models/"
 DEFAULT_MODEL = "gemini-2.5-flash-preview-tts"
 
 # 出力はヘッダのない PCM で返るため、wav に詰め直す
+RETRIES = 4       # レート制限に当たったときの再試行回数
+BACKOFF = 30      # 待ち時間の基準(秒)。試行ごとに伸ばす
+PACE = 4          # 連続生成時に1行ごとに空ける間隔(秒)
+
 SAMPLE_RATE = 24000
 SAMPLE_WIDTH = 2
 CHANNELS = 1
@@ -87,6 +92,7 @@ def main() -> int:
     ap.add_argument("--out", required=True)
     ap.add_argument("--model", default=DEFAULT_MODEL)
     ap.add_argument("--only", type=int, help="この行番号だけ生成する")
+    ap.add_argument("--force", action="store_true", help="生成済みも作り直す")
     args = ap.parse_args()
 
     # 環境のAPI認証情報を使う場合は未設定で正しい
@@ -107,14 +113,30 @@ def main() -> int:
         speaker = line["speaker"]
         setting = VOICES.get(speaker, {})
         target = out_dir / f"{line['no']:02d}_{speaker}.wav"
-        try:
-            pcm = synthesise(line["text"], setting.get("voice", "Kore"),
-                             setting.get("style", ""), args.model, key)
-        except urllib.error.HTTPError as err:
-            print(f"{target.name}: {err.code} {err.read().decode()[:300]}", file=sys.stderr)
-            return 1
+
+        # 生成済みは飛ばす。レート制限で中断しても続きから再開できる
+        if target.exists() and not args.force:
+            print(f"{target.name}  生成済みのため省略")
+            continue
+
+        pcm = None
+        for attempt in range(RETRIES):
+            try:
+                pcm = synthesise(line["text"], setting.get("voice", "Kore"),
+                                 setting.get("style", ""), args.model, key)
+                break
+            except urllib.error.HTTPError as err:
+                if err.code != 429 or attempt == RETRIES - 1:
+                    print(f"{target.name}: {err.code} {err.read().decode()[:300]}",
+                          file=sys.stderr)
+                    return 1
+                wait = BACKOFF * (attempt + 1)
+                print(f"{target.name}: レート制限のため{wait}秒待ちます")
+                time.sleep(wait)
+
         write_wav(target, pcm)
         print(f"{target.name}  {len(pcm) / (SAMPLE_RATE * SAMPLE_WIDTH):.1f}秒  {line['text'][:20]}")
+        time.sleep(PACE)
 
     return 0
 
