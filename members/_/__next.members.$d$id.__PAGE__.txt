@@ -1,0 +1,25 @@
+1:"$Sreact.fragment"
+3:I[97367,["/MBTI32/_next/static/chunks/1mpnoxox0-4cg.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+8:I[97367,["/MBTI32/_next/static/chunks/1mpnoxox0-4cg.js"],"ViewportBoundary"]
+9:I[97367,["/MBTI32/_next/static/chunks/1mpnoxox0-4cg.js"],"MetadataBoundary"]
+b:I[39756,["/MBTI32/_next/static/chunks/1mpnoxox0-4cg.js"],"default"]
+c:I[37457,["/MBTI32/_next/static/chunks/1mpnoxox0-4cg.js"],"default"]
+10:I[22016,["/MBTI32/_next/static/chunks/1mpnoxox0-4cg.js"],""]
+:HL["/MBTI32/_next/static/chunks/3medmt847fn1f.css","style"]
+:HL["https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap","style"]
+7:X
+e:X
+e:C
+0:{"buildId":"T1pXMRWz1zk_aJHgYbnmr","data":[{"rsc":["$","$1","c",{"children":["$L2",null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":"$@6","staleTime":"$7","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$L8",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L9",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"エンジニア ポートフォリオ | Engineering Team"}],["$","meta","1",{"name":"description","content":"チームのエンジニアのスキルと制作物の一覧"}],["$","meta","2",{"property":"og:title","content":"エンジニア ポートフォリオ"}],["$","meta","3",{"property":"og:description","content":"チームのエンジニアのスキルと制作物の一覧"}],["$","meta","4",{"property":"og:site_name","content":"Engineering Team"}],["$","meta","5",{"property":"og:type","content":"website"}],["$","meta","6",{"name":"twitter:card","content":"summary"}],["$","meta","7",{"name":"twitter:title","content":"エンジニア ポートフォリオ"}],["$","meta","8",{"name":"twitter:description","content":"チームのエンジニアのスキルと制作物の一覧"}]]}]}]}],null]}],"isPartial":"$@a","staleTime":"$7","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}]}]]}],"isPartial":"$@d","staleTime":"$7","varyParams":"$e"},{"rsc":["$","$1","c",{"children":[null,["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}]}]]}],"isPartial":"$@f","staleTime":"$7","varyParams":"$e"},{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/MBTI32/_next/static/chunks/3medmt847fn1f.css","precedence":"next"}],["$","script","script-0",{"src":"/MBTI32/_next/static/chunks/1mpnoxox0-4cg.js","async":true}]],["$","html",null,{"lang":"ja","children":[["$","head",null,{"children":[["$","link",null,{"rel":"preconnect","href":"https://fonts.googleapis.com"}],["$","link",null,{"rel":"preconnect","href":"https://fonts.gstatic.com","crossOrigin":""}],["$","link",null,{"rel":"stylesheet","href":"https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap"}]]}],["$","body",null,{"children":["$","div",null,{"className":"wrap","children":[["$","nav",null,{"className":"site-nav","children":["$","$L10",null,{"href":"/","className":"brand","children":"Engineering Team"}]}],["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}],"notFound":[["$","main",null,{"className":"empty","children":[["$","h2",null,{"children":"ページが見つかりません"}],["$","p",null,{"children":"URLが変わったか、メンバーの登録が削除された可能性があります。"}],["$","$L10",null,{"href":"/","className":"btn","children":"一覧へ戻る"}]]}],[]]}],["$","footer",null,{"className":"site-foot","children":["© ","Engineering Team"]}]]}]}]]}]]}],"isPartial":"$@11","staleTime":"$7","varyParams":null}],"isUpgradeableISRFallback":false,"a":"$@12","rootVaryParams":null,"needsRuntimeRequest":"$@13"}
+2:E{"digest":"NEXT_HTTP_ERROR_FALLBACK;404"}
+5:null
+7:300
+13:true
+7:C
+12:0
+a:"$undefined"
+d:"$undefined"
+f:"$undefined"
+11:"$undefined"
+6:"$undefined"
