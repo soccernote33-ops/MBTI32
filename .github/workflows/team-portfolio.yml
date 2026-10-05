@@ -2,10 +2,21 @@ name: team-portfolio
 
 on:
   pull_request:
-    paths: ["team-portfolio/**"]
+    paths: ["team-portfolio/**", ".github/workflows/team-portfolio.yml"]
   push:
-    branches: [main]
-    paths: ["team-portfolio/**"]
+    paths: ["team-portfolio/**", ".github/workflows/team-portfolio.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  # 独自ドメインに切り替えたら、SITE_URL をそのURLに、BASE_PATH を空 ("") にする
+  NEXT_PUBLIC_SITE_URL: https://soccernote33-ops.github.io/MBTI32
+  NEXT_PUBLIC_BASE_PATH: /MBTI32
+  NEXT_PUBLIC_TEAM_NAME: Engineering Team
+  # 独自ドメインを使うときはここに書く (例: portfolio.example.com)
+  CUSTOM_DOMAIN: ""
 
 jobs:
   build:
@@ -23,3 +34,33 @@ jobs:
       - run: npm ci
       # JSONの書き間違い (必須項目の欠落、URLの形式など) はここでビルドエラーになる
       - run: npm run build
+      - name: Prepare Pages files
+        run: |
+          touch out/.nojekyll
+          if [ -n "$CUSTOM_DOMAIN" ]; then echo "$CUSTOM_DOMAIN" > out/CNAME; fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: team-portfolio/out
+          include-hidden-files: true
+
+  deploy:
+    needs: build
+    # 公開するブランチ。プルリクエストではビルドの確認だけ行う
+    if: github.event_name != 'pull_request' && (github.ref_name == github.event.repository.default_branch || github.ref_name == 'claude/eloquent-volta-8jj8a4')
+    runs-on: ubuntu-latest
+    concurrency: team-portfolio-deploy
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: site
+      - name: Push to gh-pages branch
+        working-directory: site
+        run: |
+          git init -q -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Deploy team-portfolio from ${GITHUB_SHA}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" gh-pages

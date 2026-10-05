@@ -1,4 +1,4 @@
-// チーム名やURLはここで変更する。SITE_URL は公開する独自ドメインに合わせて環境変数で渡す
+// チーム名やURLは環境変数で渡す (.github/workflows/team-portfolio.yml の env)
 export const site = {
   teamName: process.env.NEXT_PUBLIC_TEAM_NAME ?? "Engineering Team",
   title: "エンジニア ポートフォリオ",

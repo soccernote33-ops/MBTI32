@@ -9,9 +9,11 @@ function hue(s: string) {
 export function Avatar({ member, size = 48 }: { member: Member; size?: number }) {
   const style = { width: size, height: size, fontSize: size * 0.42 };
   if (member.avatar) {
+    // <img> には basePath が自動で付かないので、サイト内のパスには自分で付ける
+    const src = member.avatar.startsWith("/") ? `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${member.avatar}` : member.avatar;
     // 静的書き出しなので next/image の最適化は使わない
     // eslint-disable-next-line @next/next/no-img-element
-    return <img className="avatar" src={member.avatar} alt="" style={style} />;
+    return <img className="avatar" src={src} alt="" style={style} />;
   }
   return (
     <span className="avatar" aria-hidden="true" style={{ ...style, background: `hsl(${hue(member.id)} 42% 44%)` }}>

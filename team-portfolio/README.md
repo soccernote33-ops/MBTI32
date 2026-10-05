@@ -33,23 +33,30 @@ npm run dev        # http://localhost:3000
 npm run build      # out/ に静的サイトを書き出す
 ```
 
-## 独自ドメインで公開する（Vercel の場合）
+## 公開のしくみ（GitHub Pages）
 
-1. https://vercel.com で GitHub アカウントを連携し、「Add New → Project」からこのリポジトリを選ぶ
-2. **Root Directory** に `team-portfolio` を指定する（Framework は Next.js が自動で選ばれる）
-3. **Environment Variables** に次を追加して Deploy
-   - `NEXT_PUBLIC_SITE_URL` = `https://portfolio.example.com`（公開するURL）
-   - `NEXT_PUBLIC_TEAM_NAME` = チーム名（ヘッダーとページタイトルに出る）
-4. プロジェクトの **Settings → Domains** で独自ドメインを追加する
-5. Vercel の画面に表示されるDNSレコードを、ドメインを買ったサービス（お名前.com、Cloudflare など）で設定する
-   - サブドメイン（`portfolio.example.com`）なら CNAME レコード
-   - ルートドメイン（`example.com`）なら A レコード
-6. 反映されると HTTPS 証明書は自動で発行される。以降は main にマージするたびに自動で再公開される
+`team-portfolio/` 以下が変わってpushされると、GitHub Actions（`.github/workflows/team-portfolio.yml`）が
+サイトをビルドし、`gh-pages` ブランチに書き出す。GitHub Pages がそのブランチを配信する。
 
-Cloudflare Pages / Netlify を使う場合も、ルートを `team-portfolio`、ビルドコマンドを `npm run build`、
-公開ディレクトリを `out` にすれば同じように動く。
+- 公開URL: https://soccernote33-ops.github.io/MBTI32/
+- プルリクエストではビルドの確認だけを行い、公開はしない
+- 初回だけ、リポジトリの **Settings → Pages** で Source を「Deploy from a branch」、
+  Branch を `gh-pages` / `/(root)` にする
+
+### 独自ドメインに切り替える
+
+1. ドメインを取得する（お名前.com、Cloudflare Registrar など）
+2. ドメイン管理画面のDNSに、次のどちらかを追加する
+   - サブドメイン（`portfolio.example.com`）: CNAME レコード → `soccernote33-ops.github.io`
+   - ルートドメイン（`example.com`）: A レコード → `185.199.108.153` `185.199.109.153` `185.199.110.153` `185.199.111.153`
+3. `.github/workflows/team-portfolio.yml` の `env` を書き換えてpushする
+   - `CUSTOM_DOMAIN`: `portfolio.example.com`
+   - `NEXT_PUBLIC_SITE_URL`: `https://portfolio.example.com`
+   - `NEXT_PUBLIC_BASE_PATH`: `""`（空にする）
+4. **Settings → Pages** にドメインが表示されたら「Enforce HTTPS」にチェックを入れる
 
 ## 社内だけに公開したい場合
 
-このサイトは誰でも見られる静的サイトになる。社内限定にしたい場合は、配信側でアクセス制限をかける
-（Vercel の Deployment Protection、Cloudflare Access など）。
+GitHub Pages で公開したサイトは誰でも見られる。社内限定にしたい場合は、Vercel（Deployment Protection）や
+Cloudflare Pages（Cloudflare Access）に移す。どちらもルートを `team-portfolio`、ビルドコマンドを `npm run build`、
+公開ディレクトリを `out` にすれば動く。
