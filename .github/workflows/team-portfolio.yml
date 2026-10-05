@@ -1,0 +1,25 @@
+name: team-portfolio
+
+on:
+  pull_request:
+    paths: ["team-portfolio/**"]
+  push:
+    branches: [main]
+    paths: ["team-portfolio/**"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: team-portfolio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: team-portfolio/package-lock.json
+      - run: npm ci
+      # JSONの書き間違い (必須項目の欠落、URLの形式など) はここでビルドエラーになる
+      - run: npm run build

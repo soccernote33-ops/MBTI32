@@ -1,0 +1,26 @@
+{
+  "name": "山田 太郎",
+  "nameKana": "やまだ たろう",
+  "role": "バックエンドエンジニア",
+  "bio": "決済まわりのAPIを担当しています。最近はGoとPostgreSQLのチューニングに取り組んでいます。",
+  "skills": ["Go", "TypeScript", "PostgreSQL", "AWS"],
+  "avatar": "/avatars/taro-yamada.png",
+  "links": {
+    "github": "https://github.com/your-account",
+    "x": "https://x.com/your-account",
+    "site": "https://example.com",
+    "zenn": "https://zenn.dev/your-account",
+    "qiita": "https://qiita.com/your-account"
+  },
+  "projects": [
+    {
+      "title": "社内勤怠ツール",
+      "description": "Slackから打刻できる勤怠管理ツール。月200時間ぶんの手入力をなくした。",
+      "url": "https://example.com/demo",
+      "repo": "https://github.com/your-account/attendance",
+      "tech": ["Next.js", "Go", "Slack API"],
+      "year": 2026
+    }
+  ],
+  "joinedAt": "2024-04"
+}
